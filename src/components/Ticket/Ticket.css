@@ -1,0 +1,19 @@
+.Ticket{
+    border: 1 1 1px;
+    color: #333f48;
+    font-family: 'Abel', sans-serif;
+    border: 2px solid #333f48;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    width: 70%;
+    margin: 0 auto;
+}
+.Ticket h3{
+    color: #ef7d00;
+}
+
+.taskButtons{
+    margin: 2px;
+    padding: 2px;
+}

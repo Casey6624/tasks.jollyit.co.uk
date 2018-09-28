@@ -1,0 +1,13 @@
+.MainBody{
+    align-items: center;
+}
+
+.noTasks{
+    text-align: center;
+    padding-top: 25px;
+    font-size: 25px;
+}
+
+.noTasks span{
+    color: #ef7d00;
+}
