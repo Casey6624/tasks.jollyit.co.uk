@@ -1,6 +1,10 @@
+// Libaries
 import React, { Component } from "react";
+// CSS
 import classes from "./MainBody.css";
-import Ticket from "../../components/Ticket/Ticket";
+// Components
+import TicketList from "../../components/TicketList/TicketList";
+import Loading from "../SVGSpinner/Loading";
 
 class MainBody extends Component {
     state = {
@@ -15,8 +19,16 @@ class MainBody extends Component {
             taskDescription: "For PLMR"}
         ]
     }
+
     render () {
-        // Check if we have any outsanding tasks
+        /* 
+        SVG spinner displayed whenwe are loading data from server.
+        add an IF Statement to check state once backend finished.
+
+        return(
+            <Loading></Loading>
+        ) */
+        // Check if we have any outsanding tasks. Might have to change this to check for empty Array
         if(this.state.tickets[0].taskTitle === ""){
             return(
                 <div className={classes.noTasks} >NO <span>TASKS</span> CURRENTLY ASSIGNED
@@ -26,13 +38,7 @@ class MainBody extends Component {
         }
         return (
           <div className={classes.MainBody}>
-            <Ticket
-            key={this.state.tickets.taskTitle} 
-            taskTitle={this.state.tickets.taskTitle}
-            taskAssignedTo={this.state.tickets.taskAssignedTo}
-            timeAssigned={this.state.tickets.timeAssigned}
-            taskDescription={this.state.tickets.taskDescription}
-            ></Ticket>
+            <TicketList></TicketList>
           </div>
         );
     }

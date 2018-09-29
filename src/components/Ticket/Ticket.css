@@ -1,17 +1,38 @@
 .Ticket{
-    border: 1 1 1px;
-    color: #333f48;
+    color: white;
     font-family: 'Abel', sans-serif;
-    border: 2px solid #333f48;
-    border-radius: 10px;
+
     text-align: center;
     padding: 10px;
     width: 70%;
     margin: 0 auto;
+    margin-bottom: 15px;
+
+    /* Box Shadow CSS */
+  background-color: #333f48; 
+
+  -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.856);
+
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+  zoom: 1;
 }
+
+div.Ticket:hover{
+    background-color: #39454f;
+
+    -moz-box-shadow: 5px 5px 5px #ef7d00;
+  -webkit-box-shadow: 5px 5px 5px #ef7d00;
+  box-shadow: 5px 5px 5px #ef7d00;
+}
+/* Assigned To*/
 .Ticket h3{
     color: #ef7d00;
 }
+
+
 
 .taskButtons{
     margin: 2px;
