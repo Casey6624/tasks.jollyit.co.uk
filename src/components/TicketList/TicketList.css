@@ -1,4 +1,17 @@
 .ticketList{
     width: 100%;
-    padding: 25px;
+    padding-top: 25px;
+}
+
+.noTasks{
+    padding-top: 15px;
+    text-align: center;
+    font-size: 20px;
+}
+.noTasks p{
+    font-size: 35px;
+}
+
+.noTasks span{
+    color: #ef7d00;
 }

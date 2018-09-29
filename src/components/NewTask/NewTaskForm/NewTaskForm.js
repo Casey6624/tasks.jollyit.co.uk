@@ -3,10 +3,10 @@ import classes from "./NewTaskForm.css";
 
 class TaskForm extends Component{
         state = {
-            taskAssignedName: "",
-            taskAssignedTitle: "",
-            taskAssignedDescription: "",
-            taskAssignedTime: ""
+            taskAssignedName: null,
+            taskAssignedTitle: null,
+            taskAssignedDescription: null,
+            taskAssignedTime: null
         }
     
     validateTask(event){
@@ -21,9 +21,19 @@ class TaskForm extends Component{
             taskAssignedTitle: taskTitleRef,
             taskAssignedDescription: taskDescriptionRef,
             taskAssignedTime: taskTimeref
+        }, () => {
+            this.sendTaskToPHP();
         });
-        this.forceUpdate();
+
     }
+    // Runs Async when setState has finished 
+    sendTaskToPHP(){
+        let objForPHP = {};
+        objForPHP.name = this.state.taskAssignedName;
+        objForPHP.title = this.state.taskAssignedTitle;
+        objForPHP.desc = this.state.taskAssignedDescription;
+        objForPHP.time = this.state.taskAssignedTime;
+    } 
 
 
     render(){

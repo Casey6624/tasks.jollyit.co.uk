@@ -11,7 +11,7 @@ const ticket = (props) => {
             <h3>Assigned To | {props.taskAssignedTo}</h3>
             <h4><strong>Description </strong>| {props.taskDescription}</h4>
             <Button bsStyle="success" className={classes.taskButtons}>Mark As Complete</Button>
-            <Button bsStyle="danger" className={classes.taskButtons} onClick={this.handleTaskDelete} >Delete Task</Button>
+            <Button bsStyle="danger" className={classes.taskButtons} onClick={props.handleTaskDelete} >Delete Task</Button>
         </div>
     )
 }
