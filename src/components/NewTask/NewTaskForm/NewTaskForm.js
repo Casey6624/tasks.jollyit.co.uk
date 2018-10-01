@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classes from "./NewTaskForm.css";
+import axios from "axios";
 
 class TaskForm extends Component{
         state = {
@@ -33,6 +34,12 @@ class TaskForm extends Component{
         objForPHP.title = this.state.taskAssignedTitle;
         objForPHP.desc = this.state.taskAssignedDescription;
         objForPHP.time = this.state.taskAssignedTime;
+
+        // Add Axios post to PHP code 
+        axios.get("https://tasks.jollyit.co.uk/php/getTasks.php")
+        .then(res => {
+            console.log(res);
+        })
     } 
 
 

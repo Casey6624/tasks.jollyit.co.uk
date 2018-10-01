@@ -1,6 +1,5 @@
 <?php
 
-
 function Connect()
 {
  $dbhost = "10.169.0.171";

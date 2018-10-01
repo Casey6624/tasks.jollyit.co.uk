@@ -1,11 +1,14 @@
 //Libaries
 import React, { Component } from "react";
+import axios from "axios";
+import _ from "lodash";
 //Components
 import Ticket from "../Ticket/Ticket";
 import classes from "./TicketList.css";
 import ModalDelete from "../Modals/ModalDelete/ModalDelete";
 import ModalComplete from "../Modals/ModalComplete/ModalComplete";
 import TicketStats from "../TicketStats/TicketStats";
+import Loading from "../SVGSpinner/Loading";
 //Assets
 import Robot from "../../assets/robot/robot"; 
 
@@ -95,9 +98,26 @@ class TicketList extends Component{
     handleCloseCompleteModal = () =>{
         this.setState({
             showModalComplete: false
-        })
+        });
     }
+
+    // The axios HTTP request to the PHP server
+    callDB = () =>{
+        axios.get("https://tasks.jollyit.co.uk/php/getTasks.php")
+        .then(res => {
+            this.setState({
+                tickets: res.data
+            })
+        })
+        
+    }
+
+
     render(){
+        // lodash throttle to witheld the requests to 15 second intervals 
+        const getDBData = _.debounce(() => {this.callDB()}, 15000);
+        getDBData();
+
         if(this.state.tickets.length === 0){
             return(
                 <div className={classes.noTasks}>

@@ -22,7 +22,7 @@ class MainBody extends Component {
 
         return (
           <div className={classes.MainBody}>
-            <TicketList></TicketList>
+            <TicketList />
           </div>
         );
     }
