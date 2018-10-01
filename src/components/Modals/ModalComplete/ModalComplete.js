@@ -1,29 +1,28 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
-const ModalDelete = (props) => {
+const ModalComplete = (props) => {
   if(!props.show){
     return <div></div>
   }  
   return(
     <Modal.Dialog>
       <Modal.Header>
-        <Modal.Title>DELETE TASK</Modal.Title>
+        <Modal.Title>COMPLETE TASK</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-      Are you sure you want to delete the selected task below?
+      Are you sure you want to complete the task below?
       <br/><br />
-      <strong>{props.taskToDel}</strong><br/><br/>
-      <p>Warning! This will not be reversible.</p>
+      <strong>{props.taskToComplete}</strong><br/><br/>
       </Modal.Body>
 
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
-        <Button onClick={props.removeTaskFromState} bsStyle="danger">Delete Task</Button>
+        <Button onClick={props.completeTaskFromState} bsStyle="success">Complete Task</Button>
       </Modal.Footer>
     </Modal.Dialog>
     )
 }
 
-export default ModalDelete;
+export default ModalComplete;

@@ -5,7 +5,7 @@ const mainnav = (props) => {
    return(
         <div className={classes.Nav}>
         <ul>
-            <li><a href="/">Tasks</a></li>
+            <li>Jolly IT Tasks</li>
             <li><a href="/">Log Out</a></li>
         </ul>
         </div>

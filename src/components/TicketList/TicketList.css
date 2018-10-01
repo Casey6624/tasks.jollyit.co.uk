@@ -1,8 +1,11 @@
 .ticketList{
-    width: 100%;
     padding-top: 25px;
+    flex-basis: auto;
+    justify-content: flex-start
 }
 
+
+/* CSS for the text which shows when no tasks*/
 .noTasks{
     padding-top: 15px;
     text-align: center;
@@ -14,4 +17,10 @@
 
 .noTasks span{
     color: #ef7d00;
+}
+
+
+.container{
+    flex-basis: auto;
+    justify-content: flex-start
 }

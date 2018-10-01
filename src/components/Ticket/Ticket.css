@@ -4,9 +4,9 @@
 
     text-align: center;
     padding: 10px;
-    width: 70%;
-    margin: 0 auto;
-    margin-bottom: 15px;
+    width: 60%;
+    margin: 0px 15px 15px 15px;
+    float: left;
 
     /* Box Shadow CSS */
   background-color: #333f48; 
@@ -18,6 +18,14 @@
   filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
   -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
   zoom: 1;
+}
+
+@media only screen and (max-width: 620px) {
+    .Ticket {
+        float: none;
+        width: 100%;
+        margin: 15px;
+    }
 }
 
 div.Ticket:hover{

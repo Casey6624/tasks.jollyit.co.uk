@@ -1,0 +1,33 @@
+.main {
+text-align: center;
+padding: 10px;
+margin: 15px;
+margin-top: 0;
+float: right;
+color: white;
+width: 35%;
+font-family: 'Abel', sans-serif;
+align-items: right;
+/* Box Shadow CSS */
+background-color: #333f48; 
+
+-moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+-webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.856);
+
+filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+-ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+zoom: 1;}
+
+@media only screen and (max-width: 620px) {
+    .main {
+        float: none;
+        min-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .main {
+        max-width: 30%;
+    }
+}
