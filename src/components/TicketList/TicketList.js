@@ -8,7 +8,7 @@ import classes from "./TicketList.css";
 import ModalDelete from "../Modals/ModalDelete/ModalDelete";
 import ModalComplete from "../Modals/ModalComplete/ModalComplete";
 import TicketStats from "../TicketStats/TicketStats";
-//import Loading from "../SVGSpinner/Loading";
+import Loading from "../SVGSpinner/Loading";
 //Assets
 import Robot from "../../assets/robot/robot"; 
 
@@ -17,18 +17,7 @@ class TicketList extends Component{
 // -------------------------APP STATE--------------------------------
 // ------------------------------------------------------------------
     state = {
-        tickets: [
-         // example task 1   
-        {taskTitle: "EUROSERVER REBOOT",
-        taskAssignedTo: "Casey",
-        timeAssigned: "10:17am",
-        taskDescription: "We need to reboot the server at 8pm"},
-        // example task 2
-        {taskTitle: "Purchase Exchange Plan 1 License",
-        taskAssignedTo: "Tony",
-        timeAssigned: "11:35am",
-        taskDescription: "For PLMR"}
-    ],
+        tickets: [],
     // title of del task, passed to the modal
     taskDelTitle: "",
     // key of the del task
@@ -40,7 +29,8 @@ class TicketList extends Component{
     // status of the del modal, false = not displayed
     showModalDelete: false,
     // status of the complete modal, false = not displayed
-    showModalComplete: false
+    showModalComplete: false,
+    tasksAreAvailable: true
     }
 //------------------------END OF APP STATE-------------------------
 //-----------------------------------------------------------------
@@ -54,6 +44,17 @@ class TicketList extends Component{
         this.setState({tickets}, () => {
             // call the close modal function
             this.handleCloseDeleteModal();
+            // Call Axios POST to delete task
+            let taskDelURL = "https://tasks.jollyit.co.uk/php/postDelTask.php";
+            axios.post(taskDelURL, {
+                taskID: this.state.taskDelKey
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         });
     }
 
@@ -114,11 +115,18 @@ class TicketList extends Component{
 
 
     render(){
+        if(this.state.tickets.length == 0){
+            this.callDB();
+        }
         // lodash throttle to witheld the requests to 15 second intervals 
         const getDBData = _.debounce(() => {this.callDB()}, 15000);
-        getDBData();
-
+       
         if(this.state.tickets.length === 0){
+            return(
+                <Loading></Loading>
+            )
+        }
+        if(this.state.tickets.length === 0 && !this.state.tasksAreAvailable){
             return(
                 <div className={classes.noTasks}>
                 <p>BOOM! We're killing it.</p>
@@ -153,7 +161,7 @@ class TicketList extends Component{
             bsStyle="col-4"
             // Handlers
             // pop up del modal 
-            handleTaskDelete={() => this.handleShowDeleteModal(index, this.state.tickets[index].taskTitle)} 
+            handleTaskDelete={() => this.handleShowDeleteModal(index, this.state.tickets[index].taskID)} 
             // remove task from state
             handleTaskRemover={() => this.handleTaskRemove(index)} 
             // pop up complete modal
@@ -161,7 +169,7 @@ class TicketList extends Component{
             // remove completed task from state
             handleTaskCompleter={() => this.handleTaskComplete(index)}
             // Task attributes
-            key={this.state.tickets[index].taskTitle} 
+            key={this.state.tickets[index].taskID} 
             taskTitle={this.state.tickets[index].taskTitle} 
             taskAssignedTo={this.state.tickets[index].taskAssignedTo} 
             timeAssigned={this.state.tickets[index].timeAssigned} 
