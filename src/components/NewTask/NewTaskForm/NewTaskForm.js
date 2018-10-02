@@ -36,10 +36,16 @@ class TaskForm extends Component{
         objForPHP.time = this.state.taskAssignedTime;
 
         // Add Axios post to PHP code 
-        axios.get("https://tasks.jollyit.co.uk/php/getTasks.php")
-        .then(res => {
+
+        axios.post("https://tasks.jollyit.co.uk/php/postTasks.php", {
+            objForPHP
+          })
+          .then(function (res) {
             console.log(res);
-        })
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     } 
 
 

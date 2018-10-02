@@ -1,1 +1,0 @@
-() => this.deleteTask(props.key, props.title)
