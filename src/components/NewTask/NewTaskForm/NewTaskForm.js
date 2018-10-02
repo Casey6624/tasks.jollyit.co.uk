@@ -16,6 +16,7 @@ class TaskForm extends Component{
         let taskTitleRef = this.refs.taskTitleRef.value;
         let taskDescriptionRef = this.refs.taskDescriptionRef.value;
         let taskTimeref = new Date();
+        taskTimeref = taskTimeref.toUTCString();
 
         this.setState({
             taskAssignedName: taskNameRef,
@@ -27,6 +28,18 @@ class TaskForm extends Component{
         });
 
     }
+
+    clearFormInputs(){
+        document.getElementById('personInput').value = "";
+        document.getElementById('titleInput').value = "";
+        document.getElementById('descInput').value = "";
+        this.setState({
+            taskAssignedName: null,
+            taskAssignedTitle: null,
+            taskAssignedDescription: null,
+            taskAssignedTime: null
+        })
+    }
     // Runs Async when setState has finished 
     sendTaskToPHP(){
         let objForPHP = {};
@@ -34,18 +47,23 @@ class TaskForm extends Component{
         objForPHP.title = this.state.taskAssignedTitle;
         objForPHP.desc = this.state.taskAssignedDescription;
         objForPHP.time = this.state.taskAssignedTime;
-
         // Add Axios post to PHP code 
-
-        axios.post("https://tasks.jollyit.co.uk/php/postTasks.php", {
-            objForPHP
+        this.clearFormInputs();
+        let postURL = "https://tasks.jollyit.co.uk/php/postTasks.php";
+        
+        axios.post(postURL, {
+            name: this.state.taskAssignedName,
+            title: this.state.taskAssignedTitle,
+            desc: this.state.taskAssignedDescription,
+            time: this.state.taskAssignedTime
           })
-          .then(function (res) {
-            console.log(res);
+          .then(function (response) {
+            console.log(response);
           })
           .catch(function (error) {
             console.log(error);
           });
+
     } 
 
 
@@ -56,7 +74,7 @@ class TaskForm extends Component{
                 <div className={classes.add__container}>
                 <form onSubmit={this.validateTask.bind(this)}>
                     <select className={classes.add__name} ref="taskNameRef" >
-                      <option value="-" disabled="disabled" defaultValue >Name</option>
+                      <option value="-" disabled="disabled" defaultValue id="personInput">Name</option>
                         <option value="Anyone">Anyone</option>
                         <option value="Ben">Ben</option>
                         <option value="Casey">Casey</option>
@@ -65,8 +83,8 @@ class TaskForm extends Component{
                         <option value="Tony">Tony</option>
                         <option value="Tom">Tom</option>
                     </select>
-                    <input type="text" required="true" className={classes.add__title} placeholder="Add Task Title" ref="taskTitleRef"/>
-                    <input type="text" required="true" className={classes.add__description} placeholder="Add Task Description" ref="taskDescriptionRef"/>
+                    <input type="text" required="true" id="titleInput"className={classes.add__title} placeholder="Add Task Title" ref="taskTitleRef"/>
+                    <input type="text" required="true" id="descInput" className={classes.add__description} placeholder="Add Task Description" ref="taskDescriptionRef"/>
                     <button type="submit" className={classes.add__btn}><i className="ion-ios-checkmark-outline"></i></button>
                     </form>
             </div>

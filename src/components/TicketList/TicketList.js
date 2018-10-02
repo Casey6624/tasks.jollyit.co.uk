@@ -8,7 +8,7 @@ import classes from "./TicketList.css";
 import ModalDelete from "../Modals/ModalDelete/ModalDelete";
 import ModalComplete from "../Modals/ModalComplete/ModalComplete";
 import TicketStats from "../TicketStats/TicketStats";
-import Loading from "../SVGSpinner/Loading";
+//import Loading from "../SVGSpinner/Loading";
 //Assets
 import Robot from "../../assets/robot/robot"; 
 
