@@ -1,0 +1,30 @@
+.main{
+    width:500px;
+    text-align: center;
+    align-items: center;
+}  
+  input{
+    font-family: 'Archivo Narrow', sans-serif;
+    width:inherit;
+    margin-bottom: 20px;
+    padding: 12px 20px;;
+  }
+  
+  input:focus {
+      border: 3px solid #EF7D00;
+  }
+  button {
+      background-color: #EF7D00;
+      font-family: 'Archivo Narrow', sans-serif;
+      font-size: 18px;
+      color: white;
+      padding: 12px 15px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+  }
+  
+  button:hover {
+    border: 2px;
+    background-color: #ad5a00;
+  }

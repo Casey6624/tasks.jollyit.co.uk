@@ -1,0 +1,26 @@
+Create a login page and hook it up in App.js (commented code will import and display.)
+
+Get completed tasks sent to completedTasks table
+
+Fix the async call - 4 times a minute 
+
+Make SVG loader larger
+
+touch up responsive CSS 
+
+Fix date/time bug where all tasks are an hour behind 
+
+Figure out how to logout the user
+
+call SMTP test in PHP once the state has been set with username and password
+
+Add robot to login screen
+
+touch up animations, see if can make smoother, green overlay when completing a task.
+
+
+------------------Second Release---------------------------
+
+Look into using phpmailer to send email notifications to the user which the task has been set for. (this will require a Exchange Plan 1 license)
+
+Also need to create anyone@jollyit.co.uk for anyone tasks to come through to. 

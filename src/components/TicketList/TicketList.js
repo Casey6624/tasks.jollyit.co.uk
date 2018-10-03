@@ -40,19 +40,21 @@ class TicketList extends Component{
         let tickets = [...this.state.tickets];
         // slice ticket array at index
         tickets.splice(this.state.taskDelKey, 1);
-        
+        let taskID = this.state.taskDelKey;
         this.setState({tickets}, () => {
             // call the close modal function
             this.handleCloseDeleteModal();
             // Call Axios POST to delete task
             let taskDelURL = "https://tasks.jollyit.co.uk/php/postDelTask.php";
             axios.post(taskDelURL, {
-                taskID: this.state.taskDelKey
+                taskID
               })
-              .then(function (response) {
+              .then((response) => {
                 console.log(response);
+                console.log(`the key to delete is ${taskID}`);
+                this.callDB();
               })
-              .catch(function (error) {
+              .catch((error) => {
                 console.log(error);
               });
         });
@@ -68,12 +70,24 @@ class TicketList extends Component{
             this.handleCloseCompleteModal();
         });
         // Need to add insert into DB completed table function
+        let postCompletedTaskURL = "https://tasks.jollyit.co.uk/php/postCompletedTasks.php";
+        
+        axios.post(postCompletedTaskURL, {
+            taskID: index
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          console.log(index);
     }
 
     // Shows the delete modal
-    handleShowDeleteModal = (index,title) =>{
+    handleShowDeleteModal = (index,taskID, title) =>{
         this.setState({
-            taskDelKey: index,
+            taskDelKey: taskID,
             taskDelTitle: title,
             showModalDelete: true
         })
@@ -115,7 +129,7 @@ class TicketList extends Component{
 
 
     render(){
-        if(this.state.tickets.length == 0){
+        if(this.state.tickets.length === 0){
             this.callDB();
         }
         // lodash throttle to witheld the requests to 15 second intervals 
@@ -123,7 +137,7 @@ class TicketList extends Component{
        
         if(this.state.tickets.length === 0){
             return(
-                <Loading></Loading>
+                <Loading />
             )
         }
         if(this.state.tickets.length === 0 && !this.state.tasksAreAvailable){
@@ -157,11 +171,9 @@ class TicketList extends Component{
             outstandingTickets={this.state.tickets.length} 
         />
             {this.state.tickets.map((tasks, index) => <Ticket
-            // CSS
-            bsStyle="col-4"
-            // Handlers
+            // Handlers-------------------------------
             // pop up del modal 
-            handleTaskDelete={() => this.handleShowDeleteModal(index, this.state.tickets[index].taskID)} 
+            handleTaskDelete={() => this.handleShowDeleteModal(index, this.state.tickets[index].taskID, this.state.tickets[index].taskTitle)} 
             // remove task from state
             handleTaskRemover={() => this.handleTaskRemove(index)} 
             // pop up complete modal
