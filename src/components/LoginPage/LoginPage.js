@@ -28,16 +28,26 @@ class LoginPage extends Component {
     });
   }
 
+/*   handleSubmit = async e => {
+    e.preventDefault();
+    const postURL = "https://tasks.jollyit.co.uk/php/handleAuth.php";
+    const { username, password } = this.state;
+    try {
+      const result = await axios.post(postURL, {
+        username,
+        password
+      });
+      const response = await Boolean(result);
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
+  } */
+
   handleSubmit = event => {
     event.preventDefault();
     let postURL = "https://tasks.jollyit.co.uk/php/handleAuth.php";
-
-    let loginUser = this.refs.loginUser.value;
-    let loginPass = this.refs.loginPass.value;
-    this.setState({
-      username: loginUser,
-      password: loginPass
-    }, () => axios.post(postURL, {
+    axios.post(postURL, {
       username: this.state.username,
       password: this.state.password
     })
@@ -46,7 +56,7 @@ class LoginPage extends Component {
     })
     .catch(function (error) {
       console.log(error);
-    }))
+    })
   }
 
   render() {
@@ -56,19 +66,19 @@ class LoginPage extends Component {
       <Robot className={classes.Robot}/> 
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="username" bsSize="large">
-            <ControlLabel>Username</ControlLabel>
             <FormControl
               autoFocus
               type="username"
+              placeholder="Username"
               value={this.state.username}
               onChange={this.handleChange}
               ref="loginUser"
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
             <FormControl
               value={this.state.password}
+              placeholder="Password"
               onChange={this.handleChange}
               type="password"
               ref="loginPass"
