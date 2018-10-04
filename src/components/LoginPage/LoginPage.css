@@ -1,0 +1,36 @@
+@media all and (min-width: 480px) {
+    .Login {
+      padding: 60px 0;
+      text-align: left;
+    }
+  
+    .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+    font-family: 'Archivo Narrow', sans-serif;
+    }
+  }
+
+  h1{
+      text-align: center;
+      color: #333f48;
+      font-family: 'Archivo Narrow', sans-serif;
+  }
+
+  h1 span{
+    color: #ef7d00;
+}
+
+  .submitBtn{
+      background-color: #333f48;
+      color: white;
+  }
+
+  .submitBtn:hover{
+    background-color: #ef7d00;
+}
+
+  .Robot{
+    margin: 0%;
+    padding: 0%;
+  }

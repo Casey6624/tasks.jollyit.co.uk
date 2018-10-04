@@ -13,14 +13,14 @@ class App extends Component {
 
   render() {
 
-    // uncomment when the login page is completed 
-/*     if(!this.state.loggedIn){
+     
+     if(!this.state.loggedIn){
       return(
         <div>
         <LoginPage /> 
         </div> 
       )
-    } */
+    }
 
 
     return (
