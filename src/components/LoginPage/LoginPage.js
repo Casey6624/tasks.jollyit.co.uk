@@ -28,22 +28,6 @@ class LoginPage extends Component {
     });
   }
 
-/*   handleSubmit = async e => {
-    e.preventDefault();
-    const postURL = "https://tasks.jollyit.co.uk/php/handleAuth.php";
-    const { username, password } = this.state;
-    try {
-      const result = await axios.post(postURL, {
-        username,
-        password
-      });
-      const response = await Boolean(result);
-      console.log(response);
-    } catch (err) {
-      console.error(err);
-    }
-  } */
-
   handleSubmit = event => {
     event.preventDefault();
     let postURL = "https://tasks.jollyit.co.uk/php/handleAuth.php";
@@ -52,7 +36,11 @@ class LoginPage extends Component {
       password: this.state.password
     })
     .then(res => {
-      console.log(res);
+      if(res.data){
+        this.setState({
+          loggedIn: true
+        })
+      }
     })
     .catch(function (error) {
       console.log(error);
