@@ -30,7 +30,8 @@ class TicketList extends Component{
     showModalDelete: false,
     // status of the complete modal, false = not displayed
     showModalComplete: false,
-    tasksAreAvailable: true
+    tasksAreAvailable: false,
+    firstTimeGetTasks: true
     }
 //------------------------END OF APP STATE-------------------------
 //-----------------------------------------------------------------
@@ -50,8 +51,6 @@ class TicketList extends Component{
                 taskID
               })
               .then((response) => {
-                console.log(response);
-                console.log(`the key to delete is ${taskID}`);
                 this.callDB();
               })
               .catch((error) => {
@@ -63,8 +62,7 @@ class TicketList extends Component{
     handleCompleteTask = (index) => {
         let tickets = [...this.state.tickets];
         // slice ticket array at index
-        tickets.splice(this.state.taskDelKey, 1);
-        
+        tickets.splice(this.state.taskCompleteKey, 1);
         this.setState({tickets}, () => {
             // call the close modal function
             this.handleCloseCompleteModal();
@@ -73,15 +71,14 @@ class TicketList extends Component{
         let postCompletedTaskURL = "https://tasks.jollyit.co.uk/php/postCompletedTasks.php";
         
         axios.post(postCompletedTaskURL, {
-            taskID: index
+            taskID: this.state.taskCompleteKey
           })
-          .then(function (response) {
-            console.log(response);
+          .then((response) => {
+            this.callDB();
           })
           .catch(function (error) {
             console.log(error);
           });
-          console.log(index);
     }
 
     // Shows the delete modal
@@ -94,9 +91,9 @@ class TicketList extends Component{
     }
 
     // Shows the delete modal
-    handleShowCompleteModal = (index,title) =>{
+    handleShowCompleteModal = (index, taskID, title) =>{
         this.setState({
-            taskCompleteKey: index,
+            taskCompleteKey: taskID,
             taskCompleteTitle: title,
             showModalComplete: true
         })
@@ -124,22 +121,18 @@ class TicketList extends Component{
                 tickets: res.data
             })
         })
-        
     }
 
 
     render(){
-        if(this.state.tickets.length === 0){
-            this.callDB();
+        if(this.state.firstTimeGetTasks === true && this.state.tickets.length === 0){
+            this.setState({
+                firstTimeGetTasks: false
+            }, this.callDB())
         }
         // lodash throttle to witheld the requests to 15 second intervals 
         const getDBData = _.debounce(() => {this.callDB()}, 15000);
-       
-        if(this.state.tickets.length === 0){
-            return(
-                <Loading />
-            )
-        }
+        getDBData();
         if(this.state.tickets.length === 0 && !this.state.tasksAreAvailable){
             return(
                 <div className={classes.noTasks}>
@@ -149,6 +142,12 @@ class TicketList extends Component{
                 </div>
                 )
             }
+        else if(this.state.tickets.length === 0 ){
+            return(
+                <Loading />
+            )
+        }
+        
     return(
         <div>
         <ModalDelete 
@@ -177,7 +176,7 @@ class TicketList extends Component{
             // remove task from state
             handleTaskRemover={() => this.handleTaskRemove(index)} 
             // pop up complete modal
-            handleTaskComplete={() => this.handleShowCompleteModal(index, this.state.tickets[index].taskTitle)}
+            handleTaskComplete={() => this.handleShowCompleteModal(index, this.state.tickets[index].taskID, this.state.tickets[index].taskTitle)}
             // remove completed task from state
             handleTaskCompleter={() => this.handleTaskComplete(index)}
             // Task attributes

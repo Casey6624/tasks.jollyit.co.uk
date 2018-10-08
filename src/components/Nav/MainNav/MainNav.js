@@ -6,7 +6,7 @@ const mainnav = (props) => {
         <div className={classes.Nav}>
         <ul>
             <li>Jolly IT Tasks</li>
-            <li><a href="/">Log Out</a></li>
+            <li><a href=""onClick={props.LogOut}>Log Out</a></li>
         </ul>
         </div>
     )

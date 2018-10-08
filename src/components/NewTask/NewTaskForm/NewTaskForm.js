@@ -16,7 +16,8 @@ class TaskForm extends Component{
         let taskTitleRef = this.refs.taskTitleRef.value;
         let taskDescriptionRef = this.refs.taskDescriptionRef.value;
         let taskTimeref = new Date();
-        taskTimeref = taskTimeref.toUTCString();
+        //taskTimeref = taskTimeref.toUTCString();
+        taskTimeref = taskTimeref.toLocaleString('en-GB', { timeZone: 'UTC' });
 
         this.setState({
             taskAssignedName: taskNameRef,
@@ -47,8 +48,9 @@ class TaskForm extends Component{
         objForPHP.title = this.state.taskAssignedTitle;
         objForPHP.desc = this.state.taskAssignedDescription;
         objForPHP.time = this.state.taskAssignedTime;
-        // Add Axios post to PHP code 
+    
         this.clearFormInputs();
+        // POST to PHP
         let postURL = "https://tasks.jollyit.co.uk/php/postTasks.php";
         
         axios.post(postURL, {

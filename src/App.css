@@ -13,7 +13,7 @@
   input:focus {
       border: 3px solid #EF7D00;
   }
-  button {
+  .submitBtn {
       background-color: #EF7D00;
       font-family: 'Archivo Narrow', sans-serif;
       font-size: 18px;
@@ -24,7 +24,7 @@
       cursor: pointer;
   }
   
-  button:hover {
+  .submitBtn:hover {
     border: 2px;
     background-color: #ad5a00;
   }
