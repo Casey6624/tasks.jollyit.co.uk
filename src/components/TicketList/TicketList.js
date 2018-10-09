@@ -164,7 +164,7 @@ class TicketList extends Component{
         completeTaskFromState={this.handleCompleteTask} 
         taskToComplete={this.state.taskCompleteTitle} 
         />
-        <div bsStyle="container" className={classes.ticketList}>
+        <div className={classes.ticketList}>
         <TicketStats 
             bsStyle="col-4"
             outstandingTickets={this.state.tickets.length} 

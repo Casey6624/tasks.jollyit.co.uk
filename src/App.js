@@ -61,7 +61,7 @@ class App extends Component {
   render() {
 
     // Show login page if loggedIn is false    
-    if(!this.state.loggedIn && this.state.loggedIn){
+    if(!this.state.loggedIn){
       return(
         <div className={loginClasses.Login}>
         <h1 className={loginClasses.h1Title}>JOLLY IT | <span>TASKS </span></h1>

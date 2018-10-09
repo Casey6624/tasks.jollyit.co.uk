@@ -8,7 +8,7 @@ const ticket = (props) => {
         <div className={classes.Ticket}>
             <h1><strong>{props.taskTitle}</strong></h1>
             <h2>Time Assigned | {props.timeAssigned}</h2>
-            <h3>Assigned To | {props.taskAssignedTo}</h3>
+            <h3>Assigned To | <span className="badge badge-light">{props.taskAssignedTo}</span></h3>
             <h4><strong>Description </strong>| {props.taskDescription}</h4>
             <Button bsStyle="success" className={classes.taskButtons} onClick={props.handleTaskComplete} >Mark As Complete</Button>
             <Button bsStyle="danger" className={classes.taskButtons} onClick={props.handleTaskDelete} >Delete Task</Button>
