@@ -19,6 +19,15 @@ filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,Sha
 -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
 zoom: 1;}
 
+
+.main:hover{
+    background-color: #39454f;
+
+    -moz-box-shadow: 5px 5px 5px #ef7d00;
+  -webkit-box-shadow: 5px 5px 5px #ef7d00;
+  box-shadow: 5px 5px 5px #ef7d00;
+}
+
 @media only screen and (max-width: 620px) {
     .main {
         float: none;
@@ -30,4 +39,18 @@ zoom: 1;}
     .main {
         max-width: 30%;
     }
+}
+
+.orangeDivider{
+    border-top: 2px solid #ef7d00;
+}
+
+
+
+.statTitle{
+    font-weight: bold;
+}
+
+.whiteDivider{
+    border-top: 2px solid white;
 }

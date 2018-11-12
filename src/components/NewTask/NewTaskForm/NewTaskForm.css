@@ -30,24 +30,27 @@
 .add__value { width: 100px;}
 
 .add__btn {
-    font-size: 35px;
-    background: none;
-    border: none;
+    font-size: 28px;
     color: #333f48;
+    background-color: white;
     cursor: pointer;
     display: inline-block;
     vertical-align: middle;
-    line-height: 1.1;
+
     margin-left: 10px;
-}
-button, .add__btn :hover{
-    background: none;
+    border: 2px #333f48 solid;
+    border-radius: 7%;
 }
 
-.add__btn:active { transform: translateY(2px); }
+.add__btn:hover {
+    background-color: #333f48;
+    color: white;
+}
+
 
 .add__name:focus,
 .add__type:focus,
+.add__title:focus,
 .add__description:focus,
 .add__value:focus {
     outline: none;
@@ -56,3 +59,25 @@ button, .add__btn :hover{
 }
 
 .add__btn:focus { outline: none; }
+
+
+
+@media only screen and (max-width: 1115px) {
+    .add__container  {
+       margin: 0px;
+       padding: 0px;
+    }
+    .add__btn, .add__name, .add__description, .add__value, .add__title{
+        margin: 12px;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .add__container  {
+       text-align: center;
+    }
+    .add__btn, .add__name, .add__description, .add__value, .add__title{
+        margin: 12px;
+        max-width: 100%;
+    }
+}

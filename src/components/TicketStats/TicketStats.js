@@ -4,9 +4,12 @@ import classes from "./TicketStats.css";
 const TicketStats= (props) => {
     return(
         <div className={classes.main}>
-            <h1>TASK INFO</h1>
-            <h3>Current Available Tasks: <span className="badge badge-light">{props.outstandingTickets}</span></h3>
-            <h3>Total Complete Tasks: <span className="badge badge-light">0</span></h3>
+            <h1 className={classes.statTitle}>TASK STATS</h1>
+
+            <hr className={classes.orangeDivider} />
+           <h2 className={classes.companyWide}>Company Wide</h2><hr className={classes.whiteDivider}></hr>
+            <h3>Total Complete Tasks: <span className="badge badge-light">{props.completedTaskCount}</span></h3>
+            <h3>Currently Outstanding Today: <span className="badge badge-light">{props.outstandingTickets}</span></h3>
         </div>
     )
 }

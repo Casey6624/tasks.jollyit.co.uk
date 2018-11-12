@@ -31,7 +31,8 @@ class TicketList extends Component{
     // status of the complete modal, false = not displayed
     showModalComplete: false,
     tasksAreAvailable: false,
-    firstTimeGetTasks: true
+    firstTimeGetTasks: true,
+    completedTaskCount: null
     }
 //------------------------END OF APP STATE-------------------------
 //-----------------------------------------------------------------
@@ -120,6 +121,12 @@ class TicketList extends Component{
             this.setState({
                 tickets: res.data
             })
+        }),
+        axios.get("https://tasks.jollyit.co.uk/php/getCompletedTasksCount.php")
+        .then(res => {
+            this.setState({
+                completedTaskCount: res.data.taskCount
+            })
         })
     }
 
@@ -168,6 +175,7 @@ class TicketList extends Component{
         <TicketStats 
             bsStyle="col-4"
             outstandingTickets={this.state.tickets.length} 
+            completedTaskCount={this.state.completedTaskCount}
         />
             {this.state.tickets.map((tasks, index) => <Ticket
             // Handlers-------------------------------
@@ -182,7 +190,8 @@ class TicketList extends Component{
             // Task attributes
             key={this.state.tickets[index].taskID} 
             taskTitle={this.state.tickets[index].taskTitle} 
-            taskAssignedTo={this.state.tickets[index].taskAssignedTo} 
+            taskAssignedTo={this.state.tickets[index].taskAssignedTo}
+            taskPriority={this.state.tickets[index].priority}  
             timeAssigned={this.state.tickets[index].timeAssigned} 
             taskDescription={this.state.tickets[index].taskDescription}>
             </Ticket>)}
