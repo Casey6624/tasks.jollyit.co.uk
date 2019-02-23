@@ -76,7 +76,7 @@ class TaskForm extends Component{
                 <div className={classes.add__container}>
                 <form onSubmit={this.validateTask.bind(this)}>
                     <select className={classes.add__name} ref="taskNameRef" >
-                      <option value="-" disabled="disabled" defaultValue id="personInput" selected required="true">Name</option>
+                      <option value="-" disabled="disabled" defaultValue id="personInput" selected required={true}>Name</option>
                         <option value="Anyone">Anyone</option>
                         <option value="Ben">Ben</option>
                         <option value="Casey">Casey</option>
@@ -85,7 +85,7 @@ class TaskForm extends Component{
                         <option value="Tony">Tony</option>
                         <option value="Tom">Tom</option>
                     </select>
-                    <select className={classes.add__name} ref="taskPriorityRef" required="true">
+                    <select className={classes.add__name} ref="taskPriorityRef" required={true}>
                       <option value="-" disabled="disabled" defaultValue id="priorityInput" selected>Priority</option>
                         <option value="1">1 (Highest)</option>
                         <option value="2">2 (High)</option>
@@ -93,8 +93,8 @@ class TaskForm extends Component{
                         <option value="4">4 (Low)</option>
                         <option value="5">5 (Low/When Convinent)</option>
                     </select>
-                    <input type="text" required="true" id="titleInput"className={classes.add__title} placeholder="Add Task Title" ref="taskTitleRef"/>
-                    <input type="text" required="true" id="descInput" className={classes.add__description} placeholder="Add Task Description" ref="taskDescriptionRef"/>
+                    <input type="text" required={true} id="titleInput"className={classes.add__title} placeholder="Add Task Title" ref="taskTitleRef"/>
+                    <input type="text" required={true} id="descInput" className={classes.add__description} placeholder="Add Task Description" ref="taskDescriptionRef"/>
                     <button type="submit" className={classes.add__btn}>SUBMIT</button>
                     </form>
             </div>

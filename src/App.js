@@ -1,5 +1,5 @@
 // Libaries
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 // CSS
 import classes from "./App.css";
@@ -12,75 +12,75 @@ import NewTaskForm from "./components/NewTask/NewTaskForm/NewTaskForm";
 import Robot from "./assets/robot/robot";
 //import Loading from "./components/SVGSpinner/Loading";
 
-class App extends Component {
+export default function App(props){
 
-  state = {
-    loggedIn: false,
-    username: null,
-    password: null,
-    logInError: false
+  const [loggedIn, setLoggedIn] = useState(true)
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [logInError, setLoginError] = useState(false)
+
+  function validateForm() {
+    return username.length > 0 && password.length > 0;
   }
 
-  validateForm() {
-    return this.state.username.length > 0 && this.state.password.length > 0;
+  function handleChange(event){
+    let elementType = event.target.name
+    let elementValue = event.target.value
+    switch(elementType){
+      case "username":
+      setUsername(elementValue)
+      break;
+      case "password":
+      setPassword(elementValue)
+      break;
+      default:
+      break;
+    }
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
+  function handleLogOut(){
+      setLoggedIn(false)
   }
 
-  handleLogOut = () => {
-    this.setState({
-      loggedIn: false
-    })
-  }
-
-  handleSubmit = event => {
+  function handleSubmit(event){
     event.preventDefault();
     let postURL = "https://tasks.jollyit.co.uk/php/handleAuth.php";
     axios.post(postURL, {
-      username: this.state.username,
-      password: this.state.password
+      username: username,
+      password: password
     })
     .then(res => {
       if(res.data){
-        this.setState({
-          logInError: false,
-          loggedIn: true
-        })
+        setLoggedIn(true)
+        setLoginError(false)
       }else{
-        this.setState({
-          logInError: true
-        })
+        setLoginError(true)
       }
     })
   }
-
-  render() {
-
     // Show login page if loggedIn is false    
-    if(!this.state.loggedIn){
+    if(!loggedIn){
       return(
         <div className={loginClasses.Login}>
         <h1 className={loginClasses.h1Title}>JOLLY IT | <span>TASKS </span></h1>
         <Robot className={loginClasses.Robot}/> 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <FormGroup controlId="username" bsSize="large">
               <FormControl
                 autoFocus
                 type="username"
+                name="username"
                 placeholder="Username"
-                value={this.username}
-                onChange={this.handleChange}
+                value={username}
+                onChange={handleChange}
               />
             </FormGroup>
             <FormGroup controlId="password" bsSize="large">
               <FormControl
-                value={this.password}
+                value={password}
+                name="password"
                 placeholder="Password"
-                onChange={this.handleChange}
+                onChange={handleChange}
                 type="password"
               />
             </FormGroup>
@@ -89,13 +89,13 @@ class App extends Component {
               block
               bsSize="large"
               type="submit"
-              onClick={this.handleSubmit}
+              onClick={handleSubmit}
             >
               LOGIN
             </Button>
           </form>
           {/* Dynamicly render the error message */}
-          {this.state.logInError ? <div className={loginClasses.errors} show={this.state.logInError ? true : false}>
+          {logInError ? <div className={loginClasses.errors} show={logInError ? true : false}>
           <div className="alert alert-danger">
           <strong>Warning</strong> Invalid Login Details, Please Try Again.
           </div>
@@ -106,12 +106,10 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-      <MainNav LogOut={ this.handleLogOut}/>
+      <MainNav LogOut={ handleLogOut}/>
       <NewTaskForm/>
       <MainBody/>
       </div>
     );
-  }
+  
 }
-
-export default App;
