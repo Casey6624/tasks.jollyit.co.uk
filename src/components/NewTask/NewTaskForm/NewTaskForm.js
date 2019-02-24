@@ -75,8 +75,8 @@ class TaskForm extends Component{
             <div className={classes.add}>
                 <div className={classes.add__container}>
                 <form onSubmit={this.validateTask.bind(this)}>
-                    <select className={classes.add__name} ref="taskNameRef" >
-                      <option value="-" disabled="disabled" defaultValue id="personInput" selected required={true}>Name</option>
+                    <select className={classes.add__name} ref="taskNameRef">
+                      <option value="-" disabled="disabled" id="personInput" defaultValue required={true}>Name</option>
                         <option value="Anyone">Anyone</option>
                         <option value="Ben">Ben</option>
                         <option value="Casey">Casey</option>
@@ -86,7 +86,7 @@ class TaskForm extends Component{
                         <option value="Tom">Tom</option>
                     </select>
                     <select className={classes.add__name} ref="taskPriorityRef" required={true}>
-                      <option value="-" disabled="disabled" defaultValue id="priorityInput" selected>Priority</option>
+                      <option value="-" disabled="disabled" defaultValue id="priorityInput">Priority</option>
                         <option value="1">1 (Highest)</option>
                         <option value="2">2 (High)</option>
                         <option value="3">3 (Medium)</option>

@@ -19,9 +19,9 @@ export default function App(props){
   const [password, setPassword] = useState("")
   const [logInError, setLoginError] = useState(false)
 
-  function validateForm() {
+/*   function validateForm() {
     return username.length > 0 && password.length > 0;
-  }
+  } */
 
   function handleChange(event){
     let elementType = event.target.name

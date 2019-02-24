@@ -1,10 +1,16 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
-const ModalDelete = (props) => {
+export default function ModalDelete(props){
+
   if(!props.show){
-    return <div></div>
-  }  
+    return null
+  }
+
+  let { taskTitle, taskDescription } = props.taskToDelDetails
+
+  let { onHide, removeTaskFromState } = props
+
   return(
     <Modal.Dialog>
       <Modal.Header>
@@ -14,16 +20,16 @@ const ModalDelete = (props) => {
       <Modal.Body>
       Are you sure you want to delete the selected task below?
       <br/><br />
-      <strong>{props.taskToDel}</strong><br/><br/>
-      <p>Warning! This will not be reversible.</p>
+      <strong>{taskTitle}</strong><br/><br/>
+      <p>{taskDescription}</p>
+      <hr />
+      <p><span style={{color: "red", fontWeight: "bold"}}>Warning!</span> This will not be reversible.</p>
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-        <Button onClick={props.removeTaskFromState} bsStyle="danger">Delete Task</Button>
+        <Button onClick={onHide}>Close</Button>
+        <Button onClick={removeTaskFromState} bsStyle="danger">Delete Task</Button>
       </Modal.Footer>
     </Modal.Dialog>
     )
 }
-
-export default ModalDelete;
