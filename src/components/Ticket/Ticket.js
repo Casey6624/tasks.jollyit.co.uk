@@ -26,6 +26,8 @@ const ticket = (props) => {
         case "5":
         priorityAppended = "5 (Low/When Convinent Priority)"
         break;
+        default:
+        break;
     }
 
 

@@ -3,8 +3,11 @@ import { Button, Modal } from "react-bootstrap";
 
 const ModalComplete = (props) => {
   if(!props.show){
-    return <div></div>
+    return null
   }  
+
+  const {taskTitle, taskDescription} = props.taskToCompDetails;
+  const {onHide, completeTaskFromState} = props;
   return(
     <Modal.Dialog>
       <Modal.Header>
@@ -14,12 +17,14 @@ const ModalComplete = (props) => {
       <Modal.Body>
       Are you sure you want to complete the task below?
       <br/><br />
-      <strong>{props.taskToComplete}</strong><br/><br/>
+      <strong>{taskTitle}</strong><br/><br/>
+      <p>{taskDescription}</p>
+      <hr />
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-        <Button onClick={props.completeTaskFromState} bsStyle="success">Complete Task</Button>
+        <Button onClick={onHide}>Close</Button>
+        <Button onClick={completeTaskFromState} id="comp" bsStyle="success">Complete Task</Button>
       </Modal.Footer>
     </Modal.Dialog>
     )

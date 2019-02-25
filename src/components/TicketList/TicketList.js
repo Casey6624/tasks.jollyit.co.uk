@@ -35,8 +35,8 @@ export default function TicketList(props){
     
     // removes the task from state at it's current index
     function handleRemoveTask(){
+        handleCloseModals("event", "del")
             let taskID =  tickets[taskDelKey].taskID
-            console.log(taskID)
             let taskDelURL = "https://tasks.jollyit.co.uk/php/postDelTask.php";
             axios.post(taskDelURL, {
                 taskID
@@ -52,20 +52,17 @@ export default function TicketList(props){
               });
     }
 
-    function handleCompleteTask(index){
-        let tempTickets = [...tickets];
-        // slice ticket array at index
-        tempTickets.splice( taskCompleteKey, 1);
-        setTickets(tempTickets)
-        handleCloseCompleteModal();
-        // Need to add insert into DB completed table function
+    function handleCompleteTask(){
+        handleCloseModals("event", "comp")
+        let taskID =  tickets[taskCompleteKey].taskID
         let postCompletedTaskURL = "https://tasks.jollyit.co.uk/php/postCompletedTasks.php";
-        
         axios.post(postCompletedTaskURL, {
-            taskID:  taskCompleteKey
-          })
-          .then(function(response){
-            callDB();
+            taskID
+          }, function() {
+            let tempTickets = [...tickets];
+            // slice ticket array at index
+            tempTickets.splice( taskCompleteKey, 1);
+            setTickets(tempTickets)
           })
           .catch(function (error) {
             console.log(error);
@@ -73,28 +70,30 @@ export default function TicketList(props){
     }
 
     // Shows the delete modal
-    function handleShowDeleteModal(e, taskDetails){
+    function handleShowModals(e, taskDetails, type){
         let taskSelected = tickets.findIndex(task => task.taskID === taskDetails.taskID)
-
+        switch(type){
+            case "comp":
+            setTaskCompleteKey(taskSelected)
+            setShowModalComplete(true)
+            break;
+            case "del":
             setTaskDelKey(taskSelected)
             setShowModalDelete(true)
-    }
-
-    // Shows the delete modal
-    function handleShowCompleteModal(index, taskID, title){
-            setTaskCompleteKey(taskID)
-            setTaskCompleteTitle(title)
-            setShowModalComplete(true)
+            break;
+            default:
+            break;
+        }
     }
 
     // closes the delete Modal
-    function handleCloseDeleteModal(){
+    function handleCloseModals(e, type){
+        if(type === "del"){
             setShowModalDelete(false)
-    }
-
-    // closes the complete Modal
-    function handleCloseCompleteModal(){
+        }else if(type === "comp"){
             setShowModalComplete(false)
+        }
+            
     }
 
     // The axios HTTP request to the PHP server
@@ -126,15 +125,15 @@ export default function TicketList(props){
         <ModalDelete 
         show={showModalDelete} 
         // Hide Modal
-        onHide={handleCloseDeleteModal} 
+        onHide={e => handleCloseModals(e, "del")} 
         removeTaskFromState={handleRemoveTask} 
         taskToDelDetails={tickets[taskDelKey]}
         />
         <ModalComplete 
         show={showModalComplete}
-        onHide={handleCloseCompleteModal}
+        onHide={e => handleCloseModals(e, "comp")}
         completeTaskFromState={handleCompleteTask} 
-        taskToComplete={taskCompleteTitle} 
+        taskToCompDetails={tickets[taskCompleteKey]}
         />
         <div className={classes.ticketList}>
         <TicketStats 
@@ -145,11 +144,11 @@ export default function TicketList(props){
             { tickets.map((tasks, index) => <Ticket
             // Handlers-------------------------------
             // pop up del modal 
-            handleTaskDelete={e => handleShowDeleteModal(e, tickets[index])} 
+            handleTaskDelete={e => handleShowModals(e, tickets[index], "del")} 
              // remove task from state
             //handleTaskRemover={handleTaskRemove(index)}  
             // pop up complete modal
-            //handleTaskComplete={handleShowCompleteModal(index,  tickets[index].taskID,  tickets[index].taskTitle)}
+            handleTaskComplete={e => handleShowModals(e, tickets[index], "comp")}
              // remove completed task from state
             //handleTaskCompleter={handleTaskComplete(index)} 
             // Task attributes

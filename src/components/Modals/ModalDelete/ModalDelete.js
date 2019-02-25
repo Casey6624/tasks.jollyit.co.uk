@@ -7,9 +7,10 @@ export default function ModalDelete(props){
     return null
   }
 
-  let { taskTitle, taskDescription } = props.taskToDelDetails
+  // destructure props 
+  const { taskTitle, taskDescription } = props.taskToDelDetails
 
-  let { onHide, removeTaskFromState } = props
+  const { onHide, removeTaskFromState } = props
 
   return(
     <Modal.Dialog>
@@ -28,7 +29,7 @@ export default function ModalDelete(props){
 
       <Modal.Footer>
         <Button onClick={onHide}>Close</Button>
-        <Button onClick={removeTaskFromState} bsStyle="danger">Delete Task</Button>
+        <Button onClick={removeTaskFromState} name="del" bsStyle="danger">Delete Task</Button>
       </Modal.Footer>
     </Modal.Dialog>
     )
