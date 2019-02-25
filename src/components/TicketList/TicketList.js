@@ -9,6 +9,7 @@ import ModalDelete from "../Modals/ModalDelete/ModalDelete";
 import ModalComplete from "../Modals/ModalComplete/ModalComplete";
 import TicketStats from "../TicketStats/TicketStats";
 import Loading from "../SVGSpinner/Loading";
+import EditTask from "../EditTask/EditTask";
 //Assets
 import Robot from "../../assets/robot/robot"; 
 
@@ -16,12 +17,13 @@ export default function TicketList(props){
 
     const [tickets, setTickets] = useState([])
     const [taskDelKey, setTaskDelKey] = useState(null)
-    const [taskCompleteTitle, setTaskCompleteTitle] = useState("")
     const [taskCompleteKey, setTaskCompleteKey] = useState(null)
     const [showModalDelete, setShowModalDelete] = useState(false)
     const [showModalComplete, setShowModalComplete] = useState(false)
     const [tasksAreAvailable, setTasksAreAvailable] = useState(false)
     const [completedTaskCount, setCompletedTaskCount] = useState(null)
+    const [showEditTask, setShowEditTask ] = useState(false)
+    const [selectedEditTask, setSelectedEditTask] = useState(false)
 
     // Check DB on first load of app
     useEffect(() => {
@@ -93,7 +95,13 @@ export default function TicketList(props){
         }else if(type === "comp"){
             setShowModalComplete(false)
         }
-            
+    }
+
+    function handleEditTask(e, taskDetails){
+        let taskSelected = tickets.findIndex(task => task.taskID === taskDetails.taskID)
+        setSelectedEditTask(tickets[taskSelected])
+        setShowEditTask(true)
+        console.log(selectedEditTask)
     }
 
     // The axios HTTP request to the PHP server
@@ -135,23 +143,14 @@ export default function TicketList(props){
         completeTaskFromState={handleCompleteTask} 
         taskToCompDetails={tickets[taskCompleteKey]}
         />
+        <div className={classes.ticketContainer}>
         <div className={classes.ticketList}>
-        <TicketStats 
-            bsStyle="col-4"
-            outstandingTickets={tickets.length} 
-            completedTaskCount={completedTaskCount}
-        />
             { tickets.map((tasks, index) => <Ticket
             // Handlers-------------------------------
-            // pop up del modal 
             handleTaskDelete={e => handleShowModals(e, tickets[index], "del")} 
-             // remove task from state
-            //handleTaskRemover={handleTaskRemove(index)}  
-            // pop up complete modal
             handleTaskComplete={e => handleShowModals(e, tickets[index], "comp")}
-             // remove completed task from state
-            //handleTaskCompleter={handleTaskComplete(index)} 
-            // Task attributes
+            handleEditTask={e => handleEditTask(e, tickets[index])}
+
             key={ tickets[index].taskID} 
             taskTitle={ tickets[index].taskTitle} 
             taskAssignedTo={ tickets[index].taskAssignedTo}
@@ -159,6 +158,17 @@ export default function TicketList(props){
             timeAssigned={ tickets[index].timeAssigned} 
             taskDescription={ tickets[index].taskDescription}>
             </Ticket>)}
+        </div>
+        <div className={classes.statsAndEdit}>
+        <TicketStats 
+            bsStyle="col-4"
+            outstandingTickets={tickets.length} 
+            completedTaskCount={completedTaskCount}
+        />
+        {showEditTask ? <EditTask 
+        selectedEditTask={selectedEditTask}
+        /> : null}
+        </div>
         </div>
         </div>
     )

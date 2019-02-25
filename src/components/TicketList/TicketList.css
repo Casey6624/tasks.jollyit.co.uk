@@ -1,7 +1,16 @@
+.ticketContainer{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
 .ticketList{
-    padding-top: 25px;
-    flex-basis: auto;
-    justify-content: flex-start
+    width: 100%;
+}
+
+.statsAndEdit{
+    width: 75%;
 }
 
 
@@ -17,10 +26,4 @@
 
 .noTasks span{
     color: #ef7d00;
-}
-
-
-.container{
-    flex-basis: auto;
-    justify-content: flex-start
 }

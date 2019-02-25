@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./TicketStats.css";
 
-const TicketStats= (props) => {
+export default function TicketStats(props){
     return(
         <div className={classes.main}>
             <h1 className={classes.statTitle}>TASK STATS</h1>
@@ -13,5 +13,3 @@ const TicketStats= (props) => {
         </div>
     )
 }
-
-export default TicketStats;

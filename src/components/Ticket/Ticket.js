@@ -6,7 +6,9 @@ const ticket = (props) => {
 
     let priorityAppended;
 
-    switch(props.taskPriority){
+    let { taskPriority,  taskAssignedTo, taskTitle, taskDescription, timeAssigned, handleTaskComplete, handleTaskDelete, handleEditTask} = props;
+
+    switch(taskPriority){
         case "1":
         priorityAppended = "1 (Highest Priority)"
         break;
@@ -32,14 +34,14 @@ const ticket = (props) => {
 
 
     return(
-        <div className={classes.Ticket}>
-            <h1><strong>{props.taskTitle}</strong></h1>
+        <div className={classes.Ticket} onClick={handleEditTask}>
+            <h1><strong>{taskTitle}</strong></h1>
             <h4><strong>Priority </strong> | {priorityAppended}</h4>
-            <h2>Time Assigned | {props.timeAssigned}</h2>
-            <h3>Assigned To | <span className="badge badge-light">{props.taskAssignedTo}</span></h3>
-            <h4><strong>Description </strong>| {props.taskDescription}</h4>
-            <Button bsStyle="success" className={classes.taskButtons} onClick={props.handleTaskComplete} >Mark As Complete</Button>
-            <Button bsStyle="danger" className={classes.taskButtons} onClick={props.handleTaskDelete} >Delete Task</Button>
+            <h2>Time Assigned | {timeAssigned}</h2>
+            <h3>Assigned To | <span className="badge badge-light">{taskAssignedTo}</span></h3>
+            <h4><strong>Description </strong>| {taskDescription}</h4>
+            <Button bsStyle="success" className={classes.taskButtons} onClick={handleTaskComplete} >Mark As Complete</Button>
+            <Button bsStyle="danger" className={classes.taskButtons} onClick={handleTaskDelete} >Delete Task</Button>
         </div>
     )
 }

@@ -29,7 +29,7 @@ export default function ModalDelete(props){
 
       <Modal.Footer>
         <Button onClick={onHide}>Close</Button>
-        <Button onClick={removeTaskFromState} name="del" bsStyle="danger">Delete Task</Button>
+        <Button onClick={removeTaskFromState} bsStyle="danger">Delete Task</Button>
       </Modal.Footer>
     </Modal.Dialog>
     )

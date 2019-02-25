@@ -1,0 +1,54 @@
+.main {
+    text-align: center;
+    padding: 10px;
+    margin: 15px;
+    margin-top: 0;
+    color: white;
+    font-family: 'Abel', sans-serif;
+    align-items: right;
+    /* Box Shadow CSS */
+    background-color: #333f48; 
+    
+    -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+    -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.856);
+    
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+    zoom: 1;}
+    
+    
+    .main:hover{
+        background-color: #39454f;
+    
+        -moz-box-shadow: 5px 5px 5px #ef7d00;
+      -webkit-box-shadow: 5px 5px 5px #ef7d00;
+      box-shadow: 5px 5px 5px #ef7d00;
+    }
+    
+    @media only screen and (max-width: 620px) {
+        .main {
+            float: none;
+            min-width: 100%;
+        }
+    }
+    
+    @media only screen and (max-width: 1200px) {
+        .main {
+            max-width: 30%;
+        }
+    }
+    
+    .orangeDivider{
+        border-top: 2px solid #ef7d00;
+    }
+    
+    
+    
+    .statTitle{
+        font-weight: bold;
+    }
+    
+    .whiteDivider{
+        border-top: 2px solid white;
+    }
